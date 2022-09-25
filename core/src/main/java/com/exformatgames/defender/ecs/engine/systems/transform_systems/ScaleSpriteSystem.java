@@ -16,12 +16,12 @@ public class ScaleSpriteSystem extends IteratingSystem {
 		SpriteComponent sprite = SpriteComponent.mapper.get(entity);
 
 		if(scale.isTo){
-			sprite.scaleX = scale.to;
-			sprite.scaleY = scale.to;
+			sprite.scaleX = scale.toX;
+			sprite.scaleY = scale.toY;
 		}
 		else{
-			sprite.scaleX += scale.by;
-			sprite.scaleY += scale.by;
+			sprite.scaleX += scale.byX;
+			sprite.scaleY += scale.byY;
 		}
 		
 		if(sprite.scaleX < 0 || sprite.scaleY < 0){
