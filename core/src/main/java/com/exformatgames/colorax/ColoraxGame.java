@@ -1,7 +1,9 @@
 package com.exformatgames.colorax;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.FPSLogger;
+import com.badlogic.gdx.graphics.GL20;
 import com.exformatgames.defender.ecs.test.TestCore;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
@@ -17,7 +19,7 @@ public class ColoraxGame extends ApplicationAdapter {
 		fpsLogger = new FPSLogger();
 
 		testCore = new TestCore();
-		testCore.create(false, true);
+		testCore.create(false, false);
 
 		System.out.println("entities: " + testCore.getEngine().getEntities().size());
 		int components = 0;
@@ -34,14 +36,12 @@ public class ColoraxGame extends ApplicationAdapter {
 
 	}
 
-	float counter = 0;
-
 	@Override
 	public void render() {
-		//Gdx.gl.glClearColor(0.15f, 0.15f, 0.2f, 1f);
-		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClearColor(0.15f, 0.15f, 0.2f, 1f);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		//testCore.update(Gdx.graphics.getDeltaTime());
+		testCore.update(Gdx.graphics.getDeltaTime());
 
 		fpsLogger.log();
 	}
