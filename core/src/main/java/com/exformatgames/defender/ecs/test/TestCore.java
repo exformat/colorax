@@ -18,7 +18,7 @@ public class TestCore extends DefenderCore {
 
     @Override
     protected void initEntities() {
-        for (int i = 0; i < 1500; i++) {
+        for (int i = 0; i < 500; i++) {
             new TestEntity().create();
         }
     }
