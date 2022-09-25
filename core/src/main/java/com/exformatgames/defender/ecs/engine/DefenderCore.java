@@ -119,6 +119,7 @@ public abstract class DefenderCore {
 	private void initTransformSystems(){
 		engine.addSystem(new RotationSystem()); // ok
 		engine.addSystem(new RotateSystem()); // ok
+		engine.addSystem(new ScaleLoopSystem());
 		engine.addSystem(new ScaleSpriteSystem()); // ok
 		engine.addSystem(new PositionSystem()); // ok
 		engine.addSystem(new TranslateSystem()); // ok
