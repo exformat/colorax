@@ -1,5 +1,6 @@
 package com.exformatgames.defender.ecs.test;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -18,7 +19,10 @@ public class TestCore extends DefenderCore {
 
     @Override
     protected void initEntities() {
-        for (int i = 0; i < 500; i++) {
+
+        Gdx.input.setInputProcessor(getInputMultiplexer());
+
+        for (int i = 0; i < 1; i++) {
             new TestEntity().create();
         }
     }
