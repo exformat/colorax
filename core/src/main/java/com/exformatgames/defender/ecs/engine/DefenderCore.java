@@ -126,6 +126,7 @@ public abstract class DefenderCore {
 	}
 	
 	private void initRenderSystems(boolean asyncRender){
+		engine.addSystem(new OrthogonalMapRenderSystem(camera));
 		engine.addSystem(new CullingSystem(camera)); //ok
 
 		if (asyncRender) {
@@ -158,6 +159,10 @@ public abstract class DefenderCore {
 
 	public PooledEngine getEngine() {
 		return engine;
+	}
+
+	public InputMultiplexer getInputMultiplexer() {
+		return inputMultiplexer;
 	}
 
 	public void dispose(){
