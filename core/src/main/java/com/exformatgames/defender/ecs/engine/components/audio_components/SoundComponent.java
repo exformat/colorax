@@ -11,7 +11,6 @@ public class SoundComponent implements Component {
 	public boolean isPlaying = false;
 	public boolean isStop = false;
 	public boolean isLooping = false;
-	//public float timePlaying = 0;
 	public boolean play = false;
 	public float pan = 0;
 	public float mul = 1; //0-1
