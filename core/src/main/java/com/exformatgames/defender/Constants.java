@@ -1,11 +1,21 @@
 package com.exformatgames.defender;
 
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.utils.Array;
+
 public final class Constants {
+
+	public static final Array<Integer> TARGET_KEYS = new Array<>();
+
+	public static final Array<Integer> DEFAULT_KEYS = new Array<>(new Integer[]{
+			Input.Keys.W, Input.Keys.A, Input.Keys.S, Input.Keys.D,
+			Input.Keys.SPACE, Input.Keys.Q, Input.Keys.E, Input.Keys.R,
+			Input.Keys.F, Input.Keys.G, Input.Keys.SHIFT_LEFT, Input.Keys.CONTROL_LEFT});
+
 	public static final float DIVIDER = 100;
 	public static final float SCL = 0.03f;
 
-	public static final String prefsName = "skedush_prefs";
-	public static final String prefsMaxScoreKey = "maximum score";
+	public static final String prefsName = "NAME";
 
 	public static final float WORLD_WIDTH = 10.8f;
 	public static final float WORLD_HEIGHT = 19.2f;

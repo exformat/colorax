@@ -73,7 +73,7 @@ public abstract class DefenderCore {
 		if(isDebug && ! asyncEngine)
 			initDebugSystems();
 		
-		engine.addSystem(new ResetTouchInputSystem()); //ok
+		engine.addSystem(new ResetGestureInputSystem()); //ok
 		engine.addSystem(new ExitSystem()); //ok
 
 		if (asyncEngine){
@@ -88,7 +88,8 @@ public abstract class DefenderCore {
 	}
 	
 	private void initInputSystems(){
-		engine.addSystem(new TouchInputSystem(inputMultiplexer));//ok
+		engine.addSystem(new GestureInputSystem(inputMultiplexer));//ok
+		engine.addSystem(new KeyInputSystem());//ok
 	}
 	
 	private void initBox2DSystems(){

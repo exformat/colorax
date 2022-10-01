@@ -3,8 +3,10 @@ package com.exformatgames.defender.ecs.test;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Input;
+import com.exformatgames.defender.ecs.engine.components.input_components.key_events.KeyPressedComponent;
 import com.exformatgames.defender.ecs.engine.components.rendering_components.CullingComponent;
-import com.exformatgames.defender.ecs.engine.components.touch_components.GesturePanComponent;
+import com.exformatgames.defender.ecs.engine.components.input_components.gesture_components.GesturePanComponent;
 import com.exformatgames.defender.ecs.engine.components.transform_components.PositionComponent;
 import com.exformatgames.defender.ecs.engine.components.transform_components.TranslateComponent;
 
@@ -19,6 +21,7 @@ public class TestSystem extends IteratingSystem {
         CullingComponent cullingComponent = CullingComponent.mapper.get(entity);
         GesturePanComponent gesturePanComponent = GesturePanComponent.mapper.get(entity);
         TranslateComponent translateComponent = getEngine().createComponent(TranslateComponent.class);
+        KeyPressedComponent keyPressedComponent = KeyPressedComponent.mapper.get(entity);
 
         if(gesturePanComponent != null){
             translateComponent.x = gesturePanComponent.delta.x;
@@ -28,6 +31,19 @@ public class TestSystem extends IteratingSystem {
 
         if (! cullingComponent.inViewport){
             entity.add(getEngine().createComponent(PositionComponent.class).init(0, 0));
+        }
+
+        if (keyPressedComponent.keys.contains(Input.Keys.W, false)){
+            translateComponent.y += 10 * deltaTime;
+        }
+        if (keyPressedComponent.keys.contains(Input.Keys.A, false)){
+            translateComponent.x -= 10 * deltaTime;
+        }
+        if (keyPressedComponent.keys.contains(Input.Keys.S, false)){
+            translateComponent.y -= 10 * deltaTime;
+        }
+        if (keyPressedComponent.keys.contains(Input.Keys.D, false)){
+            translateComponent.x += 10 * deltaTime;
         }
     }
 }

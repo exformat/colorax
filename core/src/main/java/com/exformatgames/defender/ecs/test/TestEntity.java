@@ -3,12 +3,11 @@ package com.exformatgames.defender.ecs.test;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.exformatgames.defender.ecs.engine.EntityBuilder;
+import com.exformatgames.defender.ecs.engine.components.input_components.key_events.KeyPressedComponent;
 import com.exformatgames.defender.ecs.engine.components.rendering_components.*;
 import com.exformatgames.defender.ecs.engine.components.tiled_components.TiledMapComponent;
-import com.exformatgames.defender.ecs.engine.components.touch_components.GesturePanComponent;
-import com.exformatgames.defender.ecs.engine.components.transform_components.LinearVelocityComponent;
+import com.exformatgames.defender.ecs.engine.components.input_components.gesture_components.GesturePanComponent;
 import com.exformatgames.defender.ecs.engine.components.transform_components.PositionComponent;
 import com.exformatgames.defender.ecs.engine.components.transform_components.ScaleLoopComponent;
 
@@ -30,6 +29,6 @@ public class TestEntity extends EntityBuilder {
         createComponent(GesturePanComponent.class);
         createComponent(TiledMapComponent.class).tiledMap = tiledMap;
         createComponent(OrthoMapRenderComponent.class).mapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
-
+        createComponent(KeyPressedComponent.class);
     }
 }
