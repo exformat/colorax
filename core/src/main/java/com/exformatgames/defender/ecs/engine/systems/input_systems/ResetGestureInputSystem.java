@@ -2,11 +2,11 @@ package com.exformatgames.defender.ecs.engine.systems.input_systems;
 
 import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.systems.*;
-import com.exformatgames.defender.ecs.engine.components.touch_components.*;
+import com.exformatgames.defender.ecs.engine.components.input_components.gesture_components.*;
 
-public class ResetTouchInputSystem extends IteratingSystem {
-	public ResetTouchInputSystem() {
-		super(Family.one(GestureTapComponent.class, GesturePanComponent.class, 
+public class ResetGestureInputSystem extends IteratingSystem {
+	public ResetGestureInputSystem() {
+		super(Family.one(GestureTapComponent.class, GesturePanComponent.class,
 						 GestureLongPressComponent.class, GestureZoomComponent.class,
 						 GestureRotateComponent.class, GestureFlingComponent.class).get());
 	}

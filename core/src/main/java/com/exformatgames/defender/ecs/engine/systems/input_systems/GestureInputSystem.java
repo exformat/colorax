@@ -5,10 +5,10 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.input.*;
 import com.badlogic.gdx.math.*;
 import com.exformatgames.defender.*;
-import com.exformatgames.defender.ecs.engine.components.touch_components.*;
+import com.exformatgames.defender.ecs.engine.components.input_components.gesture_components.*;
 import com.exformatgames.defender.ecs.engine.systems.util_system.*;
 
-public class TouchInputSystem extends EventSystem {
+public class GestureInputSystem extends EventSystem {
 
 	private TouchEvent currentEvent;
 
@@ -34,8 +34,8 @@ public class TouchInputSystem extends EventSystem {
 
 
 
-	public TouchInputSystem(InputMultiplexer inputMultiplexer) {
-		super(Family.one(GestureTapComponent.class, GesturePanComponent.class, 
+	public GestureInputSystem(InputMultiplexer inputMultiplexer) {
+		super(Family.one(GestureTapComponent.class, GesturePanComponent.class,
 						 GestureLongPressComponent.class, GestureZoomComponent.class,
 						 GestureRotateComponent.class, GestureFlingComponent.class).get());
 

@@ -1,4 +1,4 @@
-package com.exformatgames.defender.ecs.engine.components.touch_components;
+package com.exformatgames.defender.ecs.engine.components.input_components.gesture_components;
 
 import com.badlogic.ashley.core.*;
 import com.badlogic.gdx.math.*;
