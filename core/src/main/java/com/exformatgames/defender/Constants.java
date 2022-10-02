@@ -10,7 +10,13 @@ public final class Constants {
 	public static final Array<Integer> DEFAULT_KEYS = new Array<>(new Integer[]{
 			Input.Keys.W, Input.Keys.A, Input.Keys.S, Input.Keys.D,
 			Input.Keys.SPACE, Input.Keys.Q, Input.Keys.E, Input.Keys.R,
-			Input.Keys.F, Input.Keys.G, Input.Keys.SHIFT_LEFT, Input.Keys.CONTROL_LEFT});
+			Input.Keys.F, Input.Keys.G, Input.Keys.SHIFT_LEFT, Input.Keys.CONTROL_LEFT
+	});
+
+	public static final Array<Integer> DEFAULT_BUTTONS = new Array<>(new Integer[]{
+			Input.Buttons.LEFT, Input.Buttons.RIGHT, Input.Buttons.MIDDLE,
+			Input.Buttons.FORWARD, Input.Buttons.BACK
+	});
 
 	public static final float DIVIDER = 100;
 	public static final float SCL = 0.03f;
