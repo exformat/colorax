@@ -10,16 +10,16 @@ import com.exformatgames.defender.ecs.engine.components.transform_components.*;
 
 import static com.badlogic.gdx.graphics.g2d.SpriteBatch.*;
 
-public class PositionSystem extends IteratingSystem {
+public class NewPositionSystem extends IteratingSystem {
 
-	public PositionSystem() {
-		super(Family.all(PositionComponent.class).get());
+	public NewPositionSystem() {
+		super(Family.all(NewPositionComponent.class).get());
 	}
 
 	@Override
 	protected void processEntity(Entity entity, float dt) {
 
-		PositionComponent position = PositionComponent.mapper.get(entity);
+		NewPositionComponent position = NewPositionComponent.mapper.get(entity);
 		
 		SpriteComponent sprite = SpriteComponent.mapper.get(entity);
 		ParticleEmitterComponent particleComponent = ParticleEmitterComponent.mapper.get(entity);
@@ -27,6 +27,11 @@ public class PositionSystem extends IteratingSystem {
 		PointSoundComponent pointSoundComponent = PointSoundComponent.mapper.get(entity);
 		LightComponent lightComponent = LightComponent.mapper.get(entity);
 		CameraComponent cameraComponent = CameraComponent.mapper.get(entity);
+		PositionComponent positionComponent = PositionComponent.mapper.get(entity);
+
+		if(positionComponent != null){
+			positionComponent.init(position.x, position.y);
+		}
 
 		if(particleComponent != null){
 			particleComponent.emitter.setPosition(position.x, position.y);
@@ -55,12 +60,12 @@ public class PositionSystem extends IteratingSystem {
 			sprite.y = position.y;
 
 			if (sprite.dirty){
-				entity.remove(PositionComponent.class);
+				entity.remove(NewPositionComponent.class);
 				return;
 			} 
 			if (sprite.rotation != 0 || sprite.scaleX != 1 || sprite.scaleY != 1) {			
 				sprite.dirty = true;			
-				entity.remove(PositionComponent.class);
+				entity.remove(NewPositionComponent.class);
 				return;		
 			} 		
 
@@ -80,6 +85,6 @@ public class PositionSystem extends IteratingSystem {
 		}
 		
 
-		entity.remove(PositionComponent.class);
+		entity.remove(NewPositionComponent.class);
 	}
 }

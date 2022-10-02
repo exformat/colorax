@@ -34,14 +34,14 @@ public class UpdateTransformSystem extends IteratingSystem {
 		Vector2 position = bodyComponent.body.getPosition();
 		float angle = bodyComponent.body.getAngle() * MathUtils.radiansToDegrees;
 
-		PositionComponent positionComponent = getEngine().createComponent(PositionComponent.class);
+		NewPositionComponent newPositionComponent = getEngine().createComponent(NewPositionComponent.class);
 		RotationComponent rotationComponent = getEngine().createComponent(RotationComponent.class);
 		
-		positionComponent.x = position.x - sizeComponent.halfWidth;
-		positionComponent.y = position.y - sizeComponent.halfHeight;
+		newPositionComponent.x = position.x - sizeComponent.halfWidth;
+		newPositionComponent.y = position.y - sizeComponent.halfHeight;
 		rotationComponent.degress = angle;
 		
-		entity.add(positionComponent);
+		entity.add(newPositionComponent);
 		entity.add(rotationComponent);
 
 		bodyComponent.oldPosition.set(position);

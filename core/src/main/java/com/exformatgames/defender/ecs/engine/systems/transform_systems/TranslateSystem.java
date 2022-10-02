@@ -27,7 +27,13 @@ public class TranslateSystem extends IteratingSystem {
 		PointSoundComponent pointSoundComponent = PointSoundComponent.mapper.get(entity);
 		LightComponent lightComponent = LightComponent.mapper.get(entity);
 		CameraComponent cameraComponent = CameraComponent.mapper.get(entity);
-		
+		PositionComponent positionComponent = PositionComponent.mapper.get(entity);
+
+		if(positionComponent != null){
+			positionComponent.x += translate.x;
+			positionComponent.y += translate.y;
+		}
+
 		if(particleComponent != null){
 			float x = particleComponent.emitter.getX() + translate.x;
 			float y = particleComponent.emitter.getY() + translate.y;
