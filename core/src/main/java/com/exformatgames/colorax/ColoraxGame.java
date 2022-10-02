@@ -2,6 +2,7 @@ package com.exformatgames.colorax;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.exformatgames.defender.ecs.test.TestCore;
@@ -43,7 +44,7 @@ public class ColoraxGame extends ApplicationAdapter {
 
 		testCore.update(Gdx.graphics.getDeltaTime());
 
-		fpsLogger.log();
+		//fpsLogger.log();
 	}
 
 	
