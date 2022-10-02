@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array;
 public final class Constants {
 
 	public static final Array<Integer> TARGET_KEYS = new Array<>();
+	public static final Array<Integer> TARGET_BUTTONS = new Array<>();
 
 	public static final Array<Integer> DEFAULT_KEYS = new Array<>(new Integer[]{
 			Input.Keys.W, Input.Keys.A, Input.Keys.S, Input.Keys.D,
