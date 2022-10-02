@@ -89,7 +89,8 @@ public abstract class DefenderCore {
 	
 	private void initInputSystems(){
 		engine.addSystem(new GestureInputSystem(inputMultiplexer));//ok
-		engine.addSystem(new KeyInputSystem());//ok
+		engine.addSystem(new KeyboardInputSystem());//ok
+		engine.addSystem(new MouseInputSystem(camera));
 	}
 	
 	private void initBox2DSystems(){
