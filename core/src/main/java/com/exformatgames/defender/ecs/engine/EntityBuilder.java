@@ -29,6 +29,12 @@ public abstract class EntityBuilder {
 
 	protected abstract void create();
 
+	public static  <T extends Component> T createComponent (Entity entity, Class<T> componentType) {
+		T type = engine.createComponent(componentType);
+		entity.add(type);
+		return type;
+	}
+
 	public <T extends Component> T createComponent (Class<T> componentType) {
 		T type = engine.createComponent(componentType);
 		entity.add(type);
