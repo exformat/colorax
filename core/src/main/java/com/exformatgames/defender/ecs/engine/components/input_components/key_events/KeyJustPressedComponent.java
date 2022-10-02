@@ -4,9 +4,8 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.gdx.utils.Array;
 
-public class KeyPressedComponent implements Component {
-
+public class KeyJustPressedComponent implements Component {
     public Array<Integer> keys = new Array<>();
 
-    public static final ComponentMapper<KeyPressedComponent> mapper = ComponentMapper.getFor(KeyPressedComponent.class);
+    public static final ComponentMapper<KeyJustPressedComponent> mapper = ComponentMapper.getFor(KeyJustPressedComponent.class);
 }
