@@ -8,7 +8,7 @@ public class AngularImpulseSystem extends IteratingSystem
 {
 
 	public AngularImpulseSystem(){
-		super(Family.all(AngularImpulseComponent.class).get());
+		super(Family.one(AngularImpulseComponent.class).get());
 	}
 
 	@Override

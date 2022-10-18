@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.exformatgames.defender.Constants;
+import com.exformatgames.defender.ecs.engine.components.input_components.MouseComponent;
 import com.exformatgames.defender.ecs.engine.components.input_components.button_event_components.ButtonJustPressedComponent;
 import com.exformatgames.defender.ecs.engine.components.input_components.button_event_components.ButtonPressedComponent;
 
@@ -51,6 +52,9 @@ public class MouseInputSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         ButtonPressedComponent buttonPressedComponent = ButtonPressedComponent.mapper.get(entity);
         ButtonJustPressedComponent justPressedComponent = ButtonJustPressedComponent.mapper.get(entity);
+        MouseComponent mouseComponent = MouseComponent.mapper.get(entity);
+
+        mouseComponent.position.set(mousePosition.x, mousePosition.y);
 
         if (buttonPressedComponent != null) {
             buttonPressedComponent.buttons.clear();

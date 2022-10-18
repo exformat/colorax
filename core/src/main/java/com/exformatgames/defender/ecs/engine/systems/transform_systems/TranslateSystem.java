@@ -64,29 +64,29 @@ public class TranslateSystem extends IteratingSystem {
 		}
 		
 		if(spriteComponent != null){
-			spriteComponent.x += translate.x;
-			spriteComponent.y += translate.y;
+			for (SpriteComponent sprite: spriteComponent.spriteComponentArray) {
+				sprite.y += translate.y;
+				sprite.x += translate.x;
 
-			if (spriteComponent.dirty){
-				entity.remove(TranslateComponent.class);
-				return;
-			} 
-			if (spriteComponent.rotation != 0 || spriteComponent.scaleX != 1 || spriteComponent.scaleY != 1) {			
-				spriteComponent.dirty = true;			
-				entity.remove(TranslateComponent.class);
-				return;		
-			} 		
+				if (sprite.dirty){
+					continue;
+				}
+				if (sprite.rotation != 0 || sprite.scaleX != 1 || sprite.scaleY != 1) {
+					sprite.dirty = true;
+					continue;
+				}
 
-			float[] vertices = spriteComponent.vertices;		
+				float[] vertices = sprite.vertices;
 
-			vertices[X1] += translate.x;		
-			vertices[Y1] += translate.y; 		
-			vertices[X2] += translate.x;		
-			vertices[Y2] += translate.y; 		
-			vertices[X3] += translate.x;		
-			vertices[Y3] += translate.y; 		
-			vertices[X4] += translate.x;		
-			vertices[Y4] += translate.y;
+				vertices[X1] += translate.x;
+				vertices[Y1] += translate.y;
+				vertices[X2] += translate.x;
+				vertices[Y2] += translate.y;
+				vertices[X3] += translate.x;
+				vertices[Y3] += translate.y;
+				vertices[X4] += translate.x;
+				vertices[Y4] += translate.y;
+			}
 		}
 		
 		entity.remove(TranslateComponent.class);

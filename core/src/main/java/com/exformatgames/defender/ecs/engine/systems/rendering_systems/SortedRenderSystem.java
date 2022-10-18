@@ -11,6 +11,9 @@ import com.exformatgames.defender.ecs.engine.components.rendering_components.*;
 import com.exformatgames.defender.ecs.engine.systems.*;
 import com.exformatgames.defender.ecs.utils.*;
 
+import static com.badlogic.gdx.graphics.g2d.Batch.*;
+import static com.badlogic.gdx.graphics.g2d.Batch.Y4;
+
 public class SortedRenderSystem extends SortedIteratingSystem {
 
 	private final SpriteBatch batch;
@@ -53,7 +56,32 @@ public class SortedRenderSystem extends SortedIteratingSystem {
 		
 		if(cullingComponent == null || cullingComponent.inViewport){
 			applyShader(shaderComponent);
-			batch.draw(component.texture, component.getVertices(), 0, SpriteComponent.SPRITE_SIZE);
+			//batch.draw(component.texture, component.getVertices(), 0, SpriteComponent.SPRITE_SIZE);
+
+			for (SpriteComponent sprite: component.spriteComponentArray) {
+				float[] vertices = sprite.vertices;
+
+				/*vertices[X1] += sprite.offsetX;
+				vertices[Y1] += sprite.offsetY;
+				vertices[X2] += sprite.offsetX;
+				vertices[Y2] += sprite.offsetY;
+				vertices[X3] += sprite.offsetX;
+				vertices[Y3] += sprite.offsetY;
+				vertices[X4] += sprite.offsetX;
+				vertices[Y4] += sprite.offsetY;
+				*/
+				batch.draw(sprite.texture, sprite.getVertices(), 0, SpriteComponent.SPRITE_SIZE);
+				/*
+				vertices[X1] -= sprite.offsetX;
+				vertices[Y1] -= sprite.offsetY;
+				vertices[X2] -= sprite.offsetX;
+				vertices[Y2] -= sprite.offsetY;
+				vertices[X3] -= sprite.offsetX;
+				vertices[Y3] -= sprite.offsetY;
+				vertices[X4] -= sprite.offsetX;
+				vertices[Y4] -= sprite.offsetY;
+			 	*/
+			}
 		}
 			
 		if(shaderComponent != null)

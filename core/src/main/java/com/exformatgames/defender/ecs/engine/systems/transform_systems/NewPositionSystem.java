@@ -20,8 +20,8 @@ public class NewPositionSystem extends IteratingSystem {
 	protected void processEntity(Entity entity, float dt) {
 
 		NewPositionComponent position = NewPositionComponent.mapper.get(entity);
-		
-		SpriteComponent sprite = SpriteComponent.mapper.get(entity);
+
+		SpriteComponent spriteComponent = SpriteComponent.mapper.get(entity);
 		ParticleEmitterComponent particleComponent = ParticleEmitterComponent.mapper.get(entity);
 		B2DParticleEmitterComponent b2DParticleComponent = B2DParticleEmitterComponent.mapper.get(entity);
 		PointSoundComponent pointSoundComponent = PointSoundComponent.mapper.get(entity);
@@ -55,35 +55,34 @@ public class NewPositionSystem extends IteratingSystem {
 			cameraComponent.camera.update();
 		}
 		
-		if(sprite != null){
-			sprite.x = position.x;
-			sprite.y = position.y;
+		if(spriteComponent != null){
+			for (SpriteComponent sprite: spriteComponent.spriteComponentArray) {
+ 				sprite.x = position.x + sprite.offsetX;
+				sprite.y = position.y + sprite.offsetY;
 
-			if (sprite.dirty){
-				entity.remove(NewPositionComponent.class);
-				return;
-			} 
-			if (sprite.rotation != 0 || sprite.scaleX != 1 || sprite.scaleY != 1) {			
-				sprite.dirty = true;			
-				entity.remove(NewPositionComponent.class);
-				return;		
-			} 		
+				if (sprite.dirty){
+					continue;
+				}
+				if (sprite.rotation != 0 || sprite.scaleX != 1 || sprite.scaleY != 1) {
+					sprite.dirty = true;
+					continue;
+				}
 
-			float x2 = position.x + sprite.width;		
-			float y2 = position.y + sprite.height;		
+				float x2 = position.x + sprite.width;
+				float y2 = position.y + sprite.height;
 
-			float[] vertices = sprite.vertices;		
+				float[] vertices = sprite.vertices;
 
-			vertices[X1] = position.x;		
-			vertices[Y1] = position.y; 		
-			vertices[X2] = position.x;		
-			vertices[Y2] = y2; 		
-			vertices[X3] = x2;		
-			vertices[Y3] = y2; 		
-			vertices[X4] = x2;		
-			vertices[Y4] = position.y;
+				vertices[X1] = position.x + sprite.offsetX;
+				vertices[Y1] = position.y + sprite.offsetY;
+				vertices[X2] = position.x + sprite.offsetX;
+				vertices[Y2] = y2;
+				vertices[X3] = x2;
+				vertices[Y3] = y2;
+				vertices[X4] = x2;
+				vertices[Y4] = position.y + sprite.offsetY;
+			}
 		}
-		
 
 		entity.remove(NewPositionComponent.class);
 	}

@@ -1,5 +1,6 @@
 package com.exformatgames.defender.ecs.engine.systems.util_system;
 
+import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
@@ -25,7 +26,6 @@ public class DeleteEntitySystem extends IteratingSystem {
             if (bodyComponent != null){
                 box2dWorld.destroyBody(bodyComponent.body);
             }
-
             getEngine().removeEntity(entity);
         }
     }

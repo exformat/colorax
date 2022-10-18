@@ -9,7 +9,14 @@ public class BodyComponent implements Component {
 	
 	public Vector2 oldPosition = new Vector2();
 	public float oldRotation = 0;
-	
+
+	public Body init(Body body){
+		this.body = body;
+		oldPosition.set(body.getPosition());
+		oldRotation = body.getAngle();
+
+		return body;
+	}
 	
 	public static ComponentMapper<BodyComponent> mapper = ComponentMapper.getFor(BodyComponent.class);
 }

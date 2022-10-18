@@ -7,12 +7,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.exformatgames.defender.ecs.engine.DefenderCore;
 
 public class TestCore extends DefenderCore {
 
     public TestCore() {
-        super(new OrthographicCamera(640, 480), null, new SpriteBatch(), new InputMultiplexer(), new TextureAtlas(), null);
+        super(new OrthographicCamera(640, 480), new World(new Vector2(0, 0), true), new SpriteBatch(), new InputMultiplexer(), new TextureAtlas(), null);
 
         atlas.addRegion("testRegion", new TextureRegion(new Texture("test_texture.png")));
     }

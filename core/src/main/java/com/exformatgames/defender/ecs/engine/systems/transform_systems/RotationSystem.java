@@ -29,8 +29,10 @@ public class RotationSystem extends IteratingSystem {
 			cameraComponent.camera.update();
 		}
 		if(spriteComponent != null){
-			spriteComponent.rotation = rotation.degress;
-			spriteComponent.dirty = true;
+			for (SpriteComponent sprite: spriteComponent.spriteComponentArray) {
+				sprite.rotation = rotation.degress;
+				sprite.dirty = true;
+			}
 		}
 		
 		entity.remove(RotationComponent.class);
