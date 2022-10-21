@@ -57,8 +57,8 @@ public class NewPositionSystem extends IteratingSystem {
 		
 		if(spriteComponent != null){
 			for (SpriteComponent sprite: spriteComponent.spriteComponentArray) {
- 				sprite.x = position.x + sprite.offsetX;
-				sprite.y = position.y + sprite.offsetY;
+ 				sprite.x = position.x;
+				sprite.y = position.y;
 
 				if (sprite.dirty){
 					continue;
@@ -76,10 +76,10 @@ public class NewPositionSystem extends IteratingSystem {
 				vertices[X1] = position.x + sprite.offsetX;
 				vertices[Y1] = position.y + sprite.offsetY;
 				vertices[X2] = position.x + sprite.offsetX;
-				vertices[Y2] = y2;
-				vertices[X3] = x2;
-				vertices[Y3] = y2;
-				vertices[X4] = x2;
+				vertices[Y2] = y2 + sprite.offsetY;
+				vertices[X3] = x2 + sprite.offsetX;
+				vertices[Y3] = y2 + sprite.offsetY;
+				vertices[X4] = x2 + sprite.offsetX;
 				vertices[Y4] = position.y + sprite.offsetY;
 			}
 		}

@@ -108,28 +108,6 @@ public class SpriteComponent implements Component {
 		this.offsetX = offsetX;
 		this.offsetY = offsetY;
 
-		if (dirty) {
-			return this;
-		}
-
-		if (rotation != 0 || scaleX != 1 || scaleY != 1) {
-			dirty = true;
-			return this;
-		}
-
-		float x2 = x + width;
-		float y2 = y + height;
-		float[] vertices = this.vertices;
-
-		vertices[X1] = x + offsetX;
-		vertices[Y1] = y + offsetY;
-		vertices[X2] = x + offsetX;
-		vertices[Y2] = y2;
-		vertices[X3] = x2;
-		vertices[Y3] = y2;
-		vertices[X4] = x2;
-		vertices[Y4] = y + offsetY;
-
 		return this;
 	}
 	public SpriteComponent setUV(TextureRegion region){
@@ -147,8 +125,8 @@ public class SpriteComponent implements Component {
 	}
 
 	public SpriteComponent setPosition(float X, float Y) {
-		x = X;
-		y = Y;
+		x = X + offsetX;
+		y = Y + offsetY;
 
 		if (dirty){
 			return this;
@@ -161,36 +139,48 @@ public class SpriteComponent implements Component {
 		float x2 = X + width;
 		float y2 = Y + height;
 
-		vertices[X1] = X + offsetX;
-		vertices[Y1] = Y + offsetY;
-		vertices[X2] = X + offsetX;
+		vertices[X1] = X;
+		vertices[Y1] = Y;
+		vertices[X2] = X;
 		vertices[Y2] = y2;
 		vertices[X3] = x2;
 		vertices[Y3] = y2;
 		vertices[X4] = x2;
-		vertices[Y4] = Y + offsetY;
+		vertices[Y4] = Y;
 		dirty = true;
 
 		return this;
 	}
 
-	public float[] getVertices() {		
+	public SpriteComponent rotation(float degres){
+		this.rotation = degres;
+		dirty = true;
+		return this;
+	}
+
+	public SpriteComponent rotate(float degres){
+		this.rotation += degres;
+		dirty = true;
+		return this;
+	}
+
+	public float[] getVertices() {
 		if (dirty) {			
 			dirty = false; 			
-			float[] vertices = this.vertices;			
+			float[] vertices = this.vertices;
 			float localX = -originX;
 			float localY = -originY;
-			float localX2 = localX + width;			
-			float localY2 = localY + height;			
-			float worldOriginX = this.x - localX;
-			float worldOriginY = this.y - localY;
+			float localX2 = localX + width;
+			float localY2 = localY + height;
+			float worldOriginX = this.x - localX + offsetX;
+			float worldOriginY = this.y - localY + offsetY;
 
-			if (scaleX != 1 || scaleY != 1) {				
-				localX *= scaleX;				
-				localY *= scaleY;				
-				localX2 *= scaleX;				
-				localY2 *= scaleY;			
-			}			
+			if (scaleX != 1 || scaleY != 1) {
+				localX *= scaleX;
+				localY *= scaleY;
+				localX2 *= scaleX;
+				localY2 *= scaleY;
+			}
 
 			if (rotation != 0) {				
 				final float cos = MathUtils.cosDeg(rotation);				
@@ -203,36 +193,35 @@ public class SpriteComponent implements Component {
 				final float localX2Sin = localX2 * sin;				
 				final float localY2Cos = localY2 * cos;				
 				final float localY2Sin = localY2 * sin; 				
-				final float x1 = localXCos - localYSin + worldOriginX;				
+				final float x1 = localXCos - localYSin + worldOriginX;
 				final float y1 = localYCos + localXSin + worldOriginY;
 				vertices[X1] = x1;
 				vertices[Y1] = y1;
-				final float x2 = localXCos - localY2Sin + worldOriginX;				
-				final float y2 = localY2Cos + localXSin + worldOriginY;				
+				final float x2 = localXCos - localY2Sin + worldOriginX;
+				final float y2 = localY2Cos + localXSin + worldOriginY;
 				vertices[X2] = x2;
-				vertices[Y2] = y2; 				
-				final float x3 = localX2Cos - localY2Sin + worldOriginX;				
-				final float y3 = localY2Cos + localX2Sin + worldOriginY;				
-				vertices[X3] = x3;				
-				vertices[Y3] = y3; 				
-				vertices[X4] = x1 + (x3 - x2);				
+				vertices[Y2] = y2;
+				final float x3 = localX2Cos - localY2Sin + worldOriginX;
+				final float y3 = localY2Cos + localX2Sin + worldOriginY;
+				vertices[X3] = x3;
+				vertices[Y3] = y3;
+				vertices[X4] = x1 + (x3 - x2);
 				vertices[Y4] = y3 - (y2 - y1);
 			} else {				
-				final float x1 = localX + worldOriginX;				
-				final float y1 = localY + worldOriginY;				
-				final float x2 = localX2 + worldOriginX;				
-				final float y2 = localY2 + worldOriginY; 				
+				final float x1 = localX + worldOriginX;
+				final float y1 = localY + worldOriginY;
+				final float x2 = localX2 + worldOriginX;
+				final float y2 = localY2 + worldOriginY;
 				vertices[X1] = x1;
 				vertices[Y1] = y1;
 				vertices[X2] = x1;
-				vertices[Y2] = y2; 				
-				vertices[X3] = x2;				
-				vertices[Y3] = y2; 				
-				vertices[X4] = x2;				
+				vertices[Y2] = y2;
+				vertices[X3] = x2;
+				vertices[Y3] = y2;
+				vertices[X4] = x2;
 				vertices[Y4] = y1;
 			}		
-		}		
-
+		}
 		return vertices;	
 	}
 

@@ -1,6 +1,5 @@
 package com.exformatgames.colorax;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -8,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.World;
 import com.exformatgames.colorax.entities.TankEntityBuilder;
-import com.exformatgames.colorax.game_systems.RotateTurretSystem;
+import com.exformatgames.colorax.game_systems.RotateTankSystem;
 import com.exformatgames.defender.ecs.engine.DefenderCore;
 
 public class ColoraxCore extends DefenderCore {
@@ -24,6 +23,6 @@ public class ColoraxCore extends DefenderCore {
 
     @Override
     protected void initGameSystems() {
-        engine.addSystem(new RotateTurretSystem());
+        engine.addSystem(new RotateTankSystem());
     }
 }
