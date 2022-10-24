@@ -183,8 +183,8 @@ public class SpriteComponent implements Component {
 			}
 
 			if (rotation != 0) {				
-				final float cos = MathUtils.cosDeg(rotation);				
-				final float sin = MathUtils.sinDeg(rotation);				
+				final float cos = MathUtils.cosDeg(rotation + offsetRotation);
+				final float sin = MathUtils.sinDeg(rotation + offsetRotation);
 				final float localXCos = localX * cos;				
 				final float localXSin = localX * sin;				
 				final float localYCos = localY * cos;				

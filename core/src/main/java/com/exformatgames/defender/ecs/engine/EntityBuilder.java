@@ -1,10 +1,12 @@
 package com.exformatgames.defender.ecs.engine;
 
 import com.badlogic.ashley.core.*;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.exformatgames.defender.ecs.engine.components.box2d.BodyComponent;
 import com.exformatgames.defender.ecs.engine.components.rendering_components.SpriteComponent;
 
 public abstract class EntityBuilder {
@@ -12,6 +14,7 @@ public abstract class EntityBuilder {
 	protected static PooledEngine engine;
 	protected static TextureAtlas atlas;
 	protected static OrthographicCamera camera;
+	protected static AssetManager assetManager;
 
 	protected static BodyDef BODY_DEF = new BodyDef();
 	protected static FixtureDef FIXTURE_DEF = new FixtureDef();
@@ -23,11 +26,12 @@ public abstract class EntityBuilder {
 
 	private static Vector2 zeroVector = new Vector2();
 	
-	public static void init(World w, PooledEngine e, TextureAtlas a, OrthographicCamera c){
+	public static void init(World w, PooledEngine e, TextureAtlas a, OrthographicCamera c, AssetManager am){
 		EntityBuilder.world = w;
 		EntityBuilder.engine = e;
 		EntityBuilder.atlas = a;
 		EntityBuilder.camera = c;
+		EntityBuilder.assetManager = am;
 	}
 
 	protected Entity entity;

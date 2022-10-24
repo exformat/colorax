@@ -4,13 +4,13 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.exformatgames.colorax.ColoraxCore;
 import com.exformatgames.defender.ecs.test.TestCore;
+import com.exformatgames.defender.ecs.utils.Particles;
 
 public class TestGameScreen implements Screen {
     private Game game;
@@ -45,7 +46,7 @@ public class TestGameScreen implements Screen {
     public void show() {
         OrthographicCamera camera = new OrthographicCamera();
 
-        gameViewport = new ExtendViewport(1280, 1024, 1920, 1080, camera);
+        gameViewport = new ExtendViewport(12.80f, 10.24f, 19.20f, 10.80f, camera);
 
         spriteBatch = new SpriteBatch();
         textureAtlas = new TextureAtlas();
@@ -53,13 +54,31 @@ public class TestGameScreen implements Screen {
         box2d = new World(new Vector2(0, 0), true);
         inputMultiplexer = new InputMultiplexer();
 
+        AssetDescriptor<TextureAtlas> atlasAssetDescriptor = new AssetDescriptor<>("atlas/colorax.atlas", TextureAtlas.class);
+
+
+
         Texture baseTank = new Texture("artwork/tank body_teal.png");
         Texture turretTank = new Texture("artwork/tank turret_teal.png");
 
+        assetManager.load("particles/bullet_track.part", ParticleEffect.class);
+        assetManager.load(atlasAssetDescriptor);
+
+
+        while (! assetManager.isFinished()){//! assetManager.isLoaded("particles/bullet_track.part")){
+            assetManager.update();
+            System.out.println("!");
+        }
+
+        ParticleEffect particleEffect = assetManager.get("particles/bullet_track.part");
+        particleEffect.scaleEffect(0.01f);
+
+        Particles.PUT("bullet_track", new ParticleEffectPool(particleEffect, 10, 100));
+
+        textureAtlas = assetManager.get(atlasAssetDescriptor);
         textureAtlas.addRegion("body", new TextureRegion(baseTank));
         textureAtlas.addRegion("turret", new TextureRegion(turretTank));
         textureAtlas.addRegion("test_region", new TextureRegion(new Texture("test_texture.png")));
-
 
         coloraxCore = new ColoraxCore(camera, box2d,
                 spriteBatch, inputMultiplexer,
@@ -73,7 +92,7 @@ public class TestGameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(0,0,0,1);
+        ScreenUtils.clear(Color.DARK_GRAY);
 
         coloraxCore.update(delta);
     }

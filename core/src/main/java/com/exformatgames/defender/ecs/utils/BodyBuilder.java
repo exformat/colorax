@@ -77,6 +77,23 @@ public class BodyBuilder {
 
 		return body;
 	}
+	public static Body buildSensorCircle(BodyDef.BodyType type, Vector2 position, float radius) {
+		resetBodyDef();
+
+		bodyDef.type = type;
+		bodyDef.position.set(position);
+		Body body = world.createBody(bodyDef);
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.isSensor = true;
+		circleShape.setRadius(radius);
+		fixtureDef.shape = circleShape;
+		fixtureDef.density = 0.5f;
+		fixtureDef.friction = 0.4f;
+		fixtureDef.restitution = 0.6f;
+		body.createFixture(fixtureDef);
+
+		return body;
+	}
 
 	public static Body buildDynamicCircle(float x, float y, float radius) {
 		resetBodyDef();

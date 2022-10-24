@@ -7,6 +7,7 @@ public class ParticleEmitterComponent implements Component {
 	
 	public ParticleEmitter emitter = null;
 	public String name;
+
 	
 	public static ComponentMapper<ParticleEmitterComponent> mapper = ComponentMapper.getFor(ParticleEmitterComponent.class);
 }

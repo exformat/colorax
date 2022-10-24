@@ -15,6 +15,6 @@ public class ParticlesSystem extends IteratingSystem
 	@Override
 	protected void processEntity(Entity entity, float dt) {
 		ParticleEffectComponent particleComponent = ParticleEffectComponent.mapper.get(entity);
-		particleComponent.effect.update(dt);
+		particleComponent.pooledEffect.update(dt);
 	}
 }

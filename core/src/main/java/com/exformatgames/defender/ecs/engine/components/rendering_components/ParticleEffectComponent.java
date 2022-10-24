@@ -2,10 +2,30 @@ package com.exformatgames.defender.ecs.engine.components.rendering_components;
 
 import com.badlogic.ashley.core.*;
 import com.badlogic.gdx.graphics.g2d.*;
+import com.exformatgames.defender.ecs.utils.Particles;
 
 public class ParticleEffectComponent implements Component {
-	
-	public ParticleEffect effect = null;
+
+	public ParticleEffectPool particleEffectPool;
+	public ParticleEffectPool.PooledEffect pooledEffect;
+	public boolean isDraw = false;
+	public String name = "";
+
+
+
+	public ParticleEffectComponent init(String name, float x, float y, boolean start){
+		this.name = name;
+		particleEffectPool = Particles.GET(name);
+		pooledEffect = particleEffectPool.obtain();
+		pooledEffect.setPosition(x, y);
+
+		if(start){
+			pooledEffect.start();
+			isDraw = true;
+		}
+
+		return this;
+	}
 	
 	public static ComponentMapper<ParticleEffectComponent> mapper = ComponentMapper.getFor(ParticleEffectComponent.class);
 }

@@ -8,6 +8,14 @@ public class ForceComponent implements Component {
 	public Vector2 force = new Vector2(0, 0);
 	
 	public boolean center = false;
-	
+
+	public ForceComponent init(Vector2 point, Vector2 force, boolean center) {
+		this.point.set(point);
+		this.force.set(force);
+		this.center = center;
+
+		return this;
+	}
+
 	public static ComponentMapper<ForceComponent> mapper = ComponentMapper.getFor(ForceComponent.class);
 }

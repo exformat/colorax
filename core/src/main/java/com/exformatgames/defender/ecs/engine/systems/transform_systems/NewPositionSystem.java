@@ -23,18 +23,24 @@ public class NewPositionSystem extends IteratingSystem {
 
 		SpriteComponent spriteComponent = SpriteComponent.mapper.get(entity);
 		ParticleEmitterComponent particleComponent = ParticleEmitterComponent.mapper.get(entity);
+		ParticleEffectComponent particleEffectComponent =ParticleEffectComponent.mapper.get(entity);
 		B2DParticleEmitterComponent b2DParticleComponent = B2DParticleEmitterComponent.mapper.get(entity);
 		PointSoundComponent pointSoundComponent = PointSoundComponent.mapper.get(entity);
 		LightComponent lightComponent = LightComponent.mapper.get(entity);
 		CameraComponent cameraComponent = CameraComponent.mapper.get(entity);
 		PositionComponent positionComponent = PositionComponent.mapper.get(entity);
+		SizeComponent sizeComponent = SizeComponent.mapper.get(entity);
 
 		if(positionComponent != null){
 			positionComponent.init(position.x, position.y);
 		}
 
 		if(particleComponent != null){
-			particleComponent.emitter.setPosition(position.x, position.y);
+			particleComponent.emitter.setPosition(position.x + sizeComponent.halfWidth, position.y + sizeComponent.halfHeight);
+		}
+
+		if(particleEffectComponent != null){
+			particleEffectComponent.pooledEffect.setPosition(position.x + sizeComponent.halfWidth, position.y + sizeComponent.halfHeight);
 		}
 
 		if(b2DParticleComponent != null){

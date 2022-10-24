@@ -21,18 +21,18 @@ public class RotateSystem extends IteratingSystem {
 		CameraComponent cameraComponent = CameraComponent.mapper.get(entity);
 
 		if(lightComponent != null){
-			float angle = lightComponent.light.getDirection() + rotate.degress;
+			float angle = lightComponent.light.getDirection() + rotate.degres;
 			lightComponent.light.setDirection(angle);
 		}
 
 		if(cameraComponent != null){
-			cameraComponent.camera.rotate(rotate.degress);
+			cameraComponent.camera.rotate(rotate.degres);
 			cameraComponent.camera.update();
 		}
 		
 		if(spriteComponent != null){
 			for (SpriteComponent sprite: spriteComponent.spriteComponentArray) {
-				sprite.rotation += rotate.degress;
+				sprite.rotation += rotate.degres;
 				sprite.dirty = true;
 			}
 

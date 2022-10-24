@@ -2,7 +2,6 @@ package com.exformatgames.defender.ecs.engine.systems.rendering_systems;
 
 import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.systems.*;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.utils.*;
@@ -10,9 +9,6 @@ import com.exformatgames.defender.ecs.engine.components.box2d.*;
 import com.exformatgames.defender.ecs.engine.components.rendering_components.*;
 import com.exformatgames.defender.ecs.engine.systems.*;
 import com.exformatgames.defender.ecs.utils.*;
-
-import static com.badlogic.gdx.graphics.g2d.Batch.*;
-import static com.badlogic.gdx.graphics.g2d.Batch.Y4;
 
 public class SortedRenderSystem extends SortedIteratingSystem {
 
@@ -23,7 +19,7 @@ public class SortedRenderSystem extends SortedIteratingSystem {
 	private long startTime = 0;
 	
 	public SortedRenderSystem(OrthographicCamera camera, SpriteBatch batch) {
-		super(Family.all(SpriteComponent.class).get(), new ZComparator());
+		super(Family.one(SpriteComponent.class, LightRenderComponent.class).get(), new ZComparator());
 		
 		this.batch = batch;
 		this.camera = camera;
@@ -45,7 +41,7 @@ public class SortedRenderSystem extends SortedIteratingSystem {
 
 	@Override
 	protected void processEntity(Entity entity, float dt) {
-		SpriteComponent component = SpriteComponent.mapper.get(entity);
+		SpriteComponent spriteComponent = SpriteComponent.mapper.get(entity);
 		ParticleEffectComponent particleComponent = ParticleEffectComponent.mapper.get(entity);
 		B2DParticleEmitterComponent b2dEmitter = B2DParticleEmitterComponent.mapper.get(entity);
 		ShaderComponent shaderComponent = ShaderComponent.mapper.get(entity);
@@ -54,49 +50,27 @@ public class SortedRenderSystem extends SortedIteratingSystem {
 		
 		
 		
-		if(cullingComponent == null || cullingComponent.inViewport){
+		if(spriteComponent != null && (cullingComponent == null || cullingComponent.inViewport)){
 			applyShader(shaderComponent);
-			//batch.draw(component.texture, component.getVertices(), 0, SpriteComponent.SPRITE_SIZE);
 
-			for (SpriteComponent sprite: component.spriteComponentArray) {
-				float[] vertices = sprite.vertices;
-
-				/*vertices[X1] += sprite.offsetX;
-				vertices[Y1] += sprite.offsetY;
-				vertices[X2] += sprite.offsetX;
-				vertices[Y2] += sprite.offsetY;
-				vertices[X3] += sprite.offsetX;
-				vertices[Y3] += sprite.offsetY;
-				vertices[X4] += sprite.offsetX;
-				vertices[Y4] += sprite.offsetY;
-				*/
+			for (SpriteComponent sprite: spriteComponent.spriteComponentArray) {
 				batch.draw(sprite.texture, sprite.getVertices(), 0, SpriteComponent.SPRITE_SIZE);
-				/*
-				vertices[X1] -= sprite.offsetX;
-				vertices[Y1] -= sprite.offsetY;
-				vertices[X2] -= sprite.offsetX;
-				vertices[Y2] -= sprite.offsetY;
-				vertices[X3] -= sprite.offsetX;
-				vertices[Y3] -= sprite.offsetY;
-				vertices[X4] -= sprite.offsetX;
-				vertices[Y4] -= sprite.offsetY;
-			 	*/
 			}
 		}
 			
 		if(shaderComponent != null)
 			batch.setShader(null);
 
-		if(particleComponent != null)
-			particleComponent.effect.draw(batch);
-		
+		if(particleComponent != null && particleComponent.isDraw){
+			particleComponent.pooledEffect.draw(batch);
+		}
 		if(b2dEmitter != null)
 			b2dEmitter.emitter.draw(batch);
 		
 		if(lightRenderComponent != null){
 			batch.end();
-			lightRenderComponent.rayHandler.setCombinedMatrix(camera);
-			lightRenderComponent.rayHandler.updateAndRender();
+			LightRenderComponent.RAY_HANDLER.setCombinedMatrix(camera);
+			LightRenderComponent.RAY_HANDLER.updateAndRender();
 			batch.begin();
 		}
 	}
