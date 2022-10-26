@@ -10,6 +10,7 @@ import com.exformatgames.colorax.entities.B2DWorldEntityBuilder;
 import com.exformatgames.colorax.entities.BoxEntityBuilder;
 import com.exformatgames.colorax.entities.TankEntityBuilder;
 import com.exformatgames.colorax.game_systems.BulletContactSystem;
+import com.exformatgames.colorax.game_systems.ExplosionSystem;
 import com.exformatgames.colorax.game_systems.PlayerControlSystem;
 import com.exformatgames.colorax.game_systems.RotateTankSystem;
 import com.exformatgames.defender.ecs.engine.DefenderCore;
@@ -37,5 +38,6 @@ public class ColoraxCore extends DefenderCore {
         engine.addSystem(new PlayerControlSystem());
         engine.addSystem(new RotateTankSystem());
         engine.addSystem(new BulletContactSystem());
+        engine.addSystem(new ExplosionSystem());
     }
 }

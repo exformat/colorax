@@ -11,8 +11,9 @@ public class AnimationComponent implements Component {
 	public float timeAnimation = 0;
 	
 	public void init(float frameTime, Array<AtlasRegion > regions, Animation.PlayMode mode, float scl){
-		animation = new Animation<AtlasRegion>(frameTime, regions, mode);
+		animation = new Animation<>(frameTime, regions, mode);
 		this.scale = scl;
+		timeAnimation = 0;
 	}
 	
 	public static ComponentMapper<AnimationComponent> mapper = ComponentMapper.getFor(AnimationComponent.class);

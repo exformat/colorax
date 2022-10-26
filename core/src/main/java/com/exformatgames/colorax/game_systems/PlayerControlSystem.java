@@ -7,6 +7,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.exformatgames.colorax.components.PLayerComponent;
 import com.exformatgames.colorax.components.TankComponent;
+import com.exformatgames.colorax.entities.BulletEntityBuilder;
 import com.exformatgames.defender.ecs.engine.EntityBuilder;
 import com.exformatgames.defender.ecs.engine.components.box2d.AngularImpulseComponent;
 import com.exformatgames.defender.ecs.engine.components.box2d.ForceComponent;
@@ -26,6 +27,7 @@ public class PlayerControlSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         KeyPressedComponent keyPressedComponent = KeyPressedComponent.mapper.get(entity);
         TankComponent tankComponent = TankComponent.mapper.get(entity);
+        ButtonJustPressedComponent buttonJustPressedComponent = ButtonJustPressedComponent.mapper.get(entity);
 
         if (keyPressedComponent.keys.contains(Input.Keys.A, false)){
             EntityBuilder.createComponent(entity, AngularImpulseComponent.class).impulse = 0.1f;
@@ -42,6 +44,10 @@ public class PlayerControlSystem extends IteratingSystem {
         if (keyPressedComponent.keys.contains(Input.Keys.S, false)){
             tankComponent.bodyDirection.nor();
             EntityBuilder.createComponent(entity, ForceComponent.class).init(new Vector2(), tankComponent.bodyDirection.scl(-20f), true);
+        }
+
+        if (buttonJustPressedComponent.buttons.contains(Input.Buttons.LEFT, false)){
+            BulletEntityBuilder.create(tankComponent.firePosition, tankComponent.fireDirection, 0.1f);
         }
     }
 }

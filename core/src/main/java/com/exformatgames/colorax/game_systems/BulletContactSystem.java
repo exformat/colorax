@@ -8,6 +8,7 @@ import com.exformatgames.colorax.entities.ExplosionEntityBuilder;
 import com.exformatgames.defender.ecs.engine.EntityBuilder;
 import com.exformatgames.defender.ecs.engine.components.box2d.RemoveBodyComponent;
 import com.exformatgames.defender.ecs.engine.components.box2d.contact_components.BeginContactComponent;
+import com.exformatgames.defender.ecs.engine.components.rendering_components.SpriteComponent;
 import com.exformatgames.defender.ecs.engine.components.transform_components.PositionComponent;
 import com.exformatgames.defender.ecs.engine.components.util_components.DeleteEntityComponent;
 
@@ -23,10 +24,10 @@ public class BulletContactSystem extends IteratingSystem {
         deleteEntityComponent.timer = 0.35f;
 
         EntityBuilder.createComponent(entity, RemoveBodyComponent.class);
+        entity.remove(SpriteComponent.class);
 
         PositionComponent positionComponent = PositionComponent.mapper.get(entity);
 
-        new ExplosionEntityBuilder().create(positionComponent.x, positionComponent.y);
-
+        ExplosionEntityBuilder.create(positionComponent.x, positionComponent.y);
     }
 }

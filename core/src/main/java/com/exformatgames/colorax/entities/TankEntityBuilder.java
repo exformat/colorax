@@ -1,17 +1,20 @@
 package com.exformatgames.colorax.entities;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.exformatgames.colorax.components.PLayerComponent;
 import com.exformatgames.colorax.components.TankComponent;
 import com.exformatgames.defender.ecs.engine.EntityBuilder;
+import com.exformatgames.defender.ecs.engine.components.audio_components.SoundComponent;
 import com.exformatgames.defender.ecs.engine.components.box2d.BodyComponent;
 import com.exformatgames.defender.ecs.engine.components.box2d.RayComponent;
 import com.exformatgames.defender.ecs.engine.components.input_components.MouseComponent;
 import com.exformatgames.defender.ecs.engine.components.input_components.button_event_components.ButtonJustPressedComponent;
 import com.exformatgames.defender.ecs.engine.components.input_components.key_events.KeyPressedComponent;
 import com.exformatgames.defender.ecs.engine.components.light_components.LightComponent;
+import com.exformatgames.defender.ecs.engine.components.rendering_components.CameraComponent;
 import com.exformatgames.defender.ecs.engine.components.rendering_components.CullingComponent;
 import com.exformatgames.defender.ecs.engine.components.rendering_components.SpriteComponent;
 import com.exformatgames.defender.ecs.engine.components.rendering_components.ZIndexComponent;
@@ -38,9 +41,9 @@ public class TankEntityBuilder extends EntityBuilder {
                 .body.setUserData(entity);
 
 
-        createComponent(SpriteComponent.class).init(atlas.findRegion("body"), 0.01f);
+        createComponent(SpriteComponent.class).init(atlas.findRegion("tank body_teal"), 0.01f);
         createComponent(SpriteComponent.class).
-                init(atlas.findRegion("turret"), 0.01f)
+                init(atlas.findRegion("tank turret_teal"), 0.01f)
                 .setOrigin(0.93f / 2f, 1.69f / 3);
 
         createComponent(ZIndexComponent.class).zIndex = 1;
@@ -50,7 +53,9 @@ public class TankEntityBuilder extends EntityBuilder {
         createComponent(ButtonJustPressedComponent.class);
 
         createComponent(SizeComponent.class).init(1.47f, 1.92f);
+        createComponent(CameraComponent.class).camera = camera;
+        createComponent(SoundComponent.class).init(assetManager.get("audio/sound/sound_tank_engine.ogg", Sound.class), 0.75f, true, 0).isLooping = true;
 
-        //createComponent(LightComponent.class).init(LightComponent.LightType.CONE, new Vector2(5, 5), Color.BLUE, 10, 100, 2, 100).light.attachToBody(BodyComponent.mapper.get(entity).body);
+        createComponent(LightComponent.class).init(LightComponent.LightType.CONE, new Vector2(5, 5), Color.BLUE, 180, 100, 2, 100).light.attachToBody(BodyComponent.mapper.get(entity).body);
     }
 }

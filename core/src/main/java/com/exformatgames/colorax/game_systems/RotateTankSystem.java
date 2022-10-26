@@ -67,12 +67,6 @@ public class RotateTankSystem extends IteratingSystem {
         spriteComponent.spriteComponentArray.get(1).setOffsetXY(tankComponent.turretPosition.x + sizeComponent.halfWidth - 0.465f,
                                                                 tankComponent.turretPosition.y + sizeComponent.halfHeight- 0.5633f);
 
-
-        ButtonJustPressedComponent buttonJustPressedComponent = ButtonJustPressedComponent.mapper.get(entity);
-        if (buttonJustPressedComponent.buttons.contains(Input.Buttons.LEFT, false)){
-            new BulletEntityBuilder().init(tankComponent.firePosition, tankComponent.fireDirection, 0.1f);
-        }
-
         Pools.free(dir);
     }
 }

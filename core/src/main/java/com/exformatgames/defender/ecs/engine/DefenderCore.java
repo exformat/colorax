@@ -107,6 +107,7 @@ public abstract class DefenderCore {
 		engine.addSystem(new UpdateTransformSystem());//ok
 		engine.addSystem(new CollisionClearSystem()); //ok
 		engine.addSystem(new UpdateWorldSystem());//ok
+		engine.addSystem(new AABBQuerySystem(box2DWorld));
 
 		box2DWorld.setContactListener(new B2DContactListener());
 	}

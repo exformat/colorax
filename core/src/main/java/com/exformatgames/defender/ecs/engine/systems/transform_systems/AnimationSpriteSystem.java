@@ -20,7 +20,7 @@ public class AnimationSpriteSystem extends IteratingSystem {
 		animationComponent.timeAnimation += dt;
 		
 		if(animationComponent.animation.getPlayMode() == Animation.PlayMode.LOOP || ! animationComponent.animation.isAnimationFinished(animationComponent.timeAnimation)){
-			sprite.init(animationComponent.animation.getKeyFrame(animationComponent.timeAnimation), animationComponent.scale);
+			sprite.setUV(animationComponent.animation.getKeyFrame(animationComponent.timeAnimation));
 		}
 	}
 }

@@ -39,7 +39,7 @@ public class SpriteComponent implements Component {
 		setColor(1, 1, 1, 1);		
 		setSize((float) region.getRegionWidth() * scl, (float) region.getRegionHeight() * scl);
 		setOrigin(width / 2, height / 2);
-
+		setOffsetXY(0, 0);
 		return this;
 	}
 	public SpriteComponent init(TextureRegion region, float scl, float offsetX, float offsetY) {

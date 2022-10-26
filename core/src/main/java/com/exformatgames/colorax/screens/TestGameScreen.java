@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -58,26 +59,25 @@ public class TestGameScreen implements Screen {
 
 
 
-        Texture baseTank = new Texture("artwork/tank body_teal.png");
-        Texture turretTank = new Texture("artwork/tank turret_teal.png");
 
         assetManager.load("particles/bullet_track.part", ParticleEffect.class);
         assetManager.load(atlasAssetDescriptor);
+        assetManager.load("audio/sound/sound_turret_shot.ogg", Sound.class);
+        assetManager.load("audio/sound/sound_explosion_bullet.ogg", Sound.class);
+        assetManager.load("audio/sound/sound_tank_engine.ogg", Sound.class);
 
-
-        while (! assetManager.isFinished()){//! assetManager.isLoaded("particles/bullet_track.part")){
+        while (! assetManager.isFinished()){
             assetManager.update();
-            System.out.println("!");
+            System.out.println(assetManager.getProgress());
         }
 
         ParticleEffect particleEffect = assetManager.get("particles/bullet_track.part");
         particleEffect.scaleEffect(0.01f);
+        particleEffect.getEmitters().removeIndex(0);
 
         Particles.PUT("bullet_track", new ParticleEffectPool(particleEffect, 10, 100));
 
         textureAtlas = assetManager.get(atlasAssetDescriptor);
-        textureAtlas.addRegion("body", new TextureRegion(baseTank));
-        textureAtlas.addRegion("turret", new TextureRegion(turretTank));
         textureAtlas.addRegion("test_region", new TextureRegion(new Texture("test_texture.png")));
 
         coloraxCore = new ColoraxCore(camera, box2d,

@@ -42,6 +42,7 @@ public class DeleteEntitySystem extends IteratingSystem {
 
                 particleEmitterComponent.isDraw = false;
             }
+
             getEngine().removeEntity(entity);
         }
     }
