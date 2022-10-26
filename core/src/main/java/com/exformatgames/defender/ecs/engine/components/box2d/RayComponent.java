@@ -9,11 +9,23 @@ public class RayComponent implements Component {
 	public Vector2 fromPoint = new Vector2();
 	public Vector2 toPoint = new Vector2(); 
 	public Vector2 collisionPoint = new Vector2(); 
-	
+
+	public boolean isCast = false;
+	public void init(Vector2 fromPoint, Vector2 toPoint){
+		this.fromPoint.set(fromPoint);
+		this.toPoint.set(toPoint);
+		isCast = true;
+	}
+
+	public void init(float fromPointX, float fromPointY, float toPointX, float toPointY){
+		fromPoint.set(fromPointX, fromPointY);
+		toPoint.set(toPointX, toPointY);
+		isCast = true;
+	}
 	public Fixture collisionFixture;
 	
-	public float maxRayLenght = 15;
-	public float lenght = 0;
+	public float maxRayLength = 15;
+	public float length = 0;
 	
 	public static ComponentMapper<RayComponent> mapper = ComponentMapper.getFor(RayComponent.class);
 }

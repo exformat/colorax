@@ -17,10 +17,10 @@ public class AngularVelocitySystem extends IteratingSystem {
 		
 		if(rotateComponent == null){
 			rotateComponent = getEngine().createComponent(RotateComponent.class);
-			rotateComponent.degress = angularVelocityComponent.value * dt;
+			rotateComponent.degres = angularVelocityComponent.value * dt;
 			entity.add(rotateComponent);
 		}else{
-			rotateComponent.degress += angularVelocityComponent.value * dt;
+			rotateComponent.degres += angularVelocityComponent.value * dt;
 		}
 	}
 }

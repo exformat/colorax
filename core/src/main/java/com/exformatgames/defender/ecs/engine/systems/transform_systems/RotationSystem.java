@@ -24,13 +24,15 @@ public class RotationSystem extends IteratingSystem {
 			lightComponent.light.setDirection(rotation.degress);
 		}
 
-		if(cameraComponent != null){
-			cameraComponent.camera.rotate(rotation.degress);
-			cameraComponent.camera.update();
-		}
+		//if(cameraComponent != null){
+		//	cameraComponent.camera.rotate(rotation.degress);
+		//	cameraComponent.camera.update();
+		//}
 		if(spriteComponent != null){
-			spriteComponent.rotation = rotation.degress;
-			spriteComponent.dirty = true;
+			for (SpriteComponent sprite: spriteComponent.spriteComponentArray) {
+				sprite.rotation = rotation.degress;
+				sprite.dirty = true;
+			}
 		}
 		
 		entity.remove(RotationComponent.class);

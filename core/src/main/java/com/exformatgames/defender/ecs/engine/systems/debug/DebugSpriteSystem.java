@@ -21,25 +21,23 @@ public class DebugSpriteSystem extends IteratingSystem
 	}
 
 	@Override
-	public void update(float deltaTime) {
+	public void startProcessing() {
 		shapeRenderer.setProjectionMatrix(camera.combined);
-		
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
 		shapeRenderer.setColor(Color.CORAL);
-		
-		super.update(deltaTime);
-		
+	}
+
+	@Override
+	public void endProcessing() {
 		shapeRenderer.end();
 	}
-	
-	
-	
+
 	@Override
 	protected void processEntity(Entity entity, float dt) {
 		SpriteComponent spriteComponent = SpriteComponent.mapper.get(entity);
-		
-		Rectangle rect = spriteComponent.getBoundingRectangle();
-		
-		shapeRenderer.rect(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
+		for (SpriteComponent sprite: spriteComponent.spriteComponentArray) {
+			Rectangle rect = sprite.getBoundingRectangle();
+			shapeRenderer.rect(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
+		}
 	}
 }

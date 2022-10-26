@@ -42,6 +42,6 @@ public class CullingSystem extends IteratingSystem {
 		CullingComponent cullingComponent = CullingComponent.mapper.get(entity);
 		SpriteComponent spriteComponent = SpriteComponent.mapper.get(entity);
 		
-		cullingComponent.inViewport = cameraBounds.contains(spriteComponent.getBoundingRectangle());
+		cullingComponent.inViewport = cameraBounds.overlaps(spriteComponent.getBoundingRectangle());
 	}
 }

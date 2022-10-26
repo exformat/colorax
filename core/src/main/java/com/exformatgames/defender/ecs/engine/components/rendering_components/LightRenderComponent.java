@@ -5,7 +5,7 @@ import box2dLight.*;
 
 public class LightRenderComponent implements Component {
 	
-	public RayHandler rayHandler = null;
+	public static RayHandler RAY_HANDLER = null;
 	
 	public static ComponentMapper<LightRenderComponent> mapper = ComponentMapper.getFor(LightRenderComponent.class);
 }

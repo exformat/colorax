@@ -19,6 +19,9 @@ public class RemoveBodySystem extends IteratingSystem
 		BodyComponent bodyComponent = BodyComponent.mapper.get(entity);
 		
 		bodyComponent.body.setActive(false);
+		bodyComponent.body.setLinearVelocity(0, 0);
+		bodyComponent.body.setAngularVelocity(0);
+
 		world.destroyBody(bodyComponent.body);
 		
 		entity.remove(BodyComponent.class);

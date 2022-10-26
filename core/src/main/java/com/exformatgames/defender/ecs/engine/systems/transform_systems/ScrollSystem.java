@@ -19,7 +19,7 @@ public class ScrollSystem extends IteratingSystem {
 	@Override
 	protected void processEntity(Entity entity, float dt) {
 		ScrollComponent scrollComponent = ScrollComponent.mapper.get(entity);
-		SpriteComponent spriteComponent = SpriteComponent.mapper.get(entity); // hmmmmmmm not good
+		SpriteComponent spriteComponent = SpriteComponent.mapper.get(entity); //TODO hmmmmmmm not good
 		TranslateComponent translateComponent = TranslateComponent.mapper.get(entity);
 		CullingComponent cullingComponent = CullingComponent.mapper.get(entity);
 		

@@ -14,6 +14,8 @@ import com.exformatgames.defender.ecs.engine.systems.input_systems.*;
 import com.exformatgames.defender.ecs.engine.systems.rendering_systems.*;
 import com.exformatgames.defender.ecs.engine.systems.transform_systems.*;
 import com.exformatgames.defender.ecs.engine.systems.util_system.*;
+import com.exformatgames.defender.ecs.utils.B2DContactListener;
+import com.exformatgames.defender.ecs.utils.BodyBuilder;
 
 public abstract class DefenderCore {
 	
@@ -48,8 +50,9 @@ public abstract class DefenderCore {
 	}
 	
 	public final void create(boolean isDebug, boolean asyncEngine){
-		EntityBuilder.set(box2DWorld, engine, atlas, camera);
-		
+		EntityBuilder.init(box2DWorld, engine, atlas, camera, assetManager);
+		BodyBuilder.init(box2DWorld);
+
 		initEntities();//abstract
 		
 		initInputSystems();
@@ -98,11 +101,15 @@ public abstract class DefenderCore {
 		engine.addSystem(new TransformBodySystem()); //ok
 		engine.addSystem(new ForceSystem()); //ok
 		engine.addSystem(new AngularImpulseSystem()); //ok
+		engine.addSystem(new LinearImpulseSystem());
 		engine.addSystem(new RemoveBodySystem(box2DWorld)); //ok
 		engine.addSystem(new RayCastSystem(box2DWorld)); //ok
-		engine.addSystem(new UpdateTransformSystem());//new
+		engine.addSystem(new UpdateTransformSystem());//ok
+		engine.addSystem(new CollisionClearSystem()); //ok
 		engine.addSystem(new UpdateWorldSystem());//ok
-		
+		engine.addSystem(new AABBQuerySystem(box2DWorld));
+
+		box2DWorld.setContactListener(new B2DContactListener());
 	}
 	
 	private void initAudioSystems(){

@@ -39,26 +39,31 @@ public class RayCastSystem extends IteratingSystem {
 	@Override
 	protected void processEntity(Entity entity, float dt) {
 		RayComponent rayComponent = RayComponent.mapper.get(entity);
-		
-		closestFraction = rayComponent.maxRayLenght;
-		
-		world.rayCast(callback, rayComponent.fromPoint, rayComponent.toPoint);
 
-		//TODO без проверки и обнуления в конце, collisionPoint будет висеть на старой фикстуре
-		if(collisionFixture != null){
-			rayComponent.collisionFixture = collisionFixture;
-			rayComponent.collisionPoint.set(collisionPoint);
-			
-			rayComponent.lenght = rayComponent.fromPoint.dst(collisionPoint);
+		if (rayComponent.isCast){
+
+			closestFraction = rayComponent.maxRayLength;
+
+			world.rayCast(callback, rayComponent.fromPoint, rayComponent.toPoint);
+
+			//TODO без проверки и обнуления в конце, collisionPoint будет висеть на старой фикстуре
+			if(collisionFixture != null){
+				rayComponent.collisionFixture = collisionFixture;
+				rayComponent.collisionPoint.set(collisionPoint);
+
+				rayComponent.length = rayComponent.fromPoint.dst(collisionPoint);
+			}
+			else{
+				rayComponent.collisionFixture = null;
+				rayComponent.collisionPoint.set(rayComponent.toPoint);
+				//TODO хз откуда берутся лишние 1.5..
+				rayComponent.length = rayComponent.maxRayLength - 1.5f;
+			}
+
+			collisionPoint.set(0,0);
+			collisionFixture = null;
+
+			rayComponent.isCast = false;
 		}
-		else{
-			rayComponent.collisionFixture = null;
-			rayComponent.collisionPoint.set(rayComponent.toPoint);
-			//TODO хз откуда берутся лишние 1.5..
-			rayComponent.lenght = rayComponent.maxRayLenght - 1.5f;
-		}
-		
-		collisionPoint.set(0,0);
-		collisionFixture = null;
 	}
 }
