@@ -17,5 +17,21 @@ public class ForceComponent implements Component {
 		return this;
 	}
 
+	public ForceComponent init(Vector2 force) {
+		this.point.set(0, 0);
+		this.force.set(force);
+		this.center = true;
+
+		return this;
+	}
+
+	public ForceComponent init(float x, float y) {
+		this.point.set(0, 0);
+		this.force.set(x, y);
+		this.center = true;
+
+		return this;
+	}
+
 	public static ComponentMapper<ForceComponent> mapper = ComponentMapper.getFor(ForceComponent.class);
 }

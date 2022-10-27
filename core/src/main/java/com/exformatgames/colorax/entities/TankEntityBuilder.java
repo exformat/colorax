@@ -55,7 +55,5 @@ public class TankEntityBuilder extends EntityBuilder {
         createComponent(SizeComponent.class).init(1.47f, 1.92f);
         createComponent(CameraComponent.class).camera = camera;
         createComponent(SoundComponent.class).init(assetManager.get("audio/sound/sound_tank_engine.ogg", Sound.class), 0.75f, true, 0).isLooping = true;
-
-        createComponent(LightComponent.class).init(LightComponent.LightType.CONE, new Vector2(5, 5), Color.BLUE, 180, 100, 2, 100).light.attachToBody(BodyComponent.mapper.get(entity).body);
     }
 }

@@ -17,5 +17,4 @@ public class ExplosionComponent implements Component {
     }
 
     public static ComponentMapper<ExplosionComponent> mapper = ComponentMapper.getFor(ExplosionComponent.class);
-
 }

@@ -56,13 +56,13 @@ public abstract class DefenderCore {
 		initEntities();//abstract
 		
 		initInputSystems();
-		
-		initGameSystems();//abstract
-		
+
 		if(box2DWorld != null){
 			initBox2DSystems();
 		}
-		
+		initGameSystems();//abstract
+
+
 		initAudioSystems();
 		engine.addSystem(new VibrationSystem());//ok
 		initAnimationEffectSystems();
