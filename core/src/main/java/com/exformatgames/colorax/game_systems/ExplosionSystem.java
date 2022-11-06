@@ -6,10 +6,10 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Pools;
-import com.exformatgames.colorax.components.ExplosionComponent;
+import com.exformatgames.colorax.components.weapon_components.DamageComponent;
+import com.exformatgames.colorax.components.weapon_components.ExplosionComponent;
 import com.exformatgames.defender.ecs.engine.EntityBuilder;
 import com.exformatgames.defender.ecs.engine.components.box2d.AABBAnswerComponent;
-import com.exformatgames.defender.ecs.engine.components.box2d.RayComponent;
 import com.exformatgames.defender.ecs.engine.components.transform_components.PositionComponent;
 
 public class ExplosionSystem extends IteratingSystem {
@@ -25,17 +25,25 @@ public class ExplosionSystem extends IteratingSystem {
         ExplosionComponent explosionComponent = ExplosionComponent.mapper.get(entity);
 
         for (Body body: aabbAnswerComponent.bodies) {
-            Vector2 dir = Pools.obtain(Vector2.class);
-            dir.set(body.getPosition());
+            if (! body.isBullet()){
+                Vector2 dir = Pools.obtain(Vector2.class);
+                dir.set(body.getPosition());
 
-            dir.sub(positionComponent.x, positionComponent.y);
-            float imp = explosionComponent.impulse / dir.len();
-            dir.nor();
-            dir.scl(imp);
+                dir.sub(positionComponent.x, positionComponent.y);
 
-            body.applyForceToCenter(dir, true);
+                float lenNor = dir.len() / explosionComponent.radius;
 
-            Pools.free(dir);
+                float imp = explosionComponent.impulse * lenNor;
+                float dmg = explosionComponent.damage * lenNor;
+                dir.nor();
+                dir.scl(imp);
+
+                body.applyForceToCenter(dir, true);
+
+                Entity targetEntity = (Entity) body.getUserData();
+                EntityBuilder.createComponent(targetEntity, DamageComponent.class).damage = dmg;
+                Pools.free(dir);
+            }
         }
         aabbAnswerComponent.bodies.clear();
         entity.remove(AABBAnswerComponent.class);

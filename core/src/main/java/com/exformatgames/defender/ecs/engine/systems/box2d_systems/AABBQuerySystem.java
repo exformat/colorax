@@ -37,7 +37,6 @@ public class AABBQuerySystem extends IteratingSystem {
         AABBQueryComponent queryComponent = AABBQueryComponent.mapper.get(entity);
 
         world.QueryAABB(queryCallback, queryComponent.x, queryComponent.y, queryComponent.x2, queryComponent.y2);
-
         entity.remove(AABBQueryComponent.class);
 
         EntityBuilder.createComponent(entity, AABBAnswerComponent.class).bodies.addAll(bodies);

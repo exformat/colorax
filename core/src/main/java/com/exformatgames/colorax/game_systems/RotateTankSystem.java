@@ -3,16 +3,12 @@ package com.exformatgames.colorax.game_systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pools;
 import com.exformatgames.colorax.components.TankComponent;
-import com.exformatgames.colorax.entities.BulletEntityBuilder;
-import com.exformatgames.defender.ecs.engine.EntityBuilder;
 import com.exformatgames.defender.ecs.engine.components.box2d.BodyComponent;
 import com.exformatgames.defender.ecs.engine.components.box2d.RayComponent;
 import com.exformatgames.defender.ecs.engine.components.input_components.MouseComponent;
-import com.exformatgames.defender.ecs.engine.components.input_components.button_event_components.ButtonJustPressedComponent;
 import com.exformatgames.defender.ecs.engine.components.rendering_components.SpriteComponent;
 import com.exformatgames.defender.ecs.engine.components.transform_components.*;
 

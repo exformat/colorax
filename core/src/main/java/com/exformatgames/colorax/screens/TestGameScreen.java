@@ -55,7 +55,7 @@ public class TestGameScreen implements Screen {
         box2d = new World(new Vector2(0, 0), true);
         inputMultiplexer = new InputMultiplexer();
 
-        AssetDescriptor<TextureAtlas> atlasAssetDescriptor = new AssetDescriptor<>("atlas/colorax.atlas", TextureAtlas.class);
+        AssetDescriptor<com.badlogic.gdx.graphics.g2d.TextureAtlas> atlasAssetDescriptor = new AssetDescriptor<>("atlas/colorax.atlas", com.badlogic.gdx.graphics.g2d.TextureAtlas.class);
 
 
 
@@ -68,7 +68,7 @@ public class TestGameScreen implements Screen {
 
         while (! assetManager.isFinished()){
             assetManager.update();
-            System.out.println(assetManager.getProgress());
+            //System.out.println(assetManager.getProgress());
         }
 
         ParticleEffect particleEffect = assetManager.get("particles/bullet_track.part");

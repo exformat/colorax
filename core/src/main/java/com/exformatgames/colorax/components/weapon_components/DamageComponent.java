@@ -1,4 +1,4 @@
-package com.exformatgames.colorax.components;
+package com.exformatgames.colorax.components.weapon_components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;

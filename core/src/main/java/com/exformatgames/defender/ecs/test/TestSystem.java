@@ -21,7 +21,7 @@ import com.exformatgames.defender.ecs.engine.components.transform_components.Lin
 import com.exformatgames.defender.ecs.engine.components.transform_components.NewPositionComponent;
 import com.exformatgames.defender.ecs.engine.components.transform_components.PositionComponent;
 import com.exformatgames.defender.ecs.engine.components.transform_components.TranslateComponent;
-import com.exformatgames.defender.ecs.engine.components.util_components.DeleteEntityComponent;
+import com.exformatgames.defender.ecs.engine.components.util_components.RemoveEntityComponent;
 
 public class TestSystem extends IteratingSystem {
 
@@ -105,7 +105,7 @@ public class TestSystem extends IteratingSystem {
             EntityBuilder.createComponent(bulletEntity, NewPositionComponent.class).init(positionComponent.x, positionComponent.y);
             EntityBuilder.createComponent(bulletEntity, SpriteComponent.class).init(region, 0.2f);
             EntityBuilder.createComponent(bulletEntity, ZIndexComponent.class).zIndex = 1;
-            EntityBuilder.createComponent(bulletEntity, DeleteEntityComponent.class).timer = 0.2f;
+            EntityBuilder.createComponent(bulletEntity, RemoveEntityComponent.class).timer = 0.2f;
 
             Pools.free(dir);
             getEngine().addEntity(bulletEntity);

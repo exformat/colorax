@@ -78,7 +78,7 @@ public abstract class DefenderCore {
 		
 		engine.addSystem(new ResetGestureInputSystem()); //ok
 		engine.addSystem(new ExitSystem()); //ok
-		engine.addSystem(new DeleteEntitySystem(box2DWorld));//ok
+		engine.addSystem(new RemoveEntitySystem(box2DWorld));//ok
 
 		if (asyncEngine){
 			new Thread(() -> {

@@ -7,15 +7,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.exformatgames.colorax.components.PLayerComponent;
 import com.exformatgames.colorax.components.TankComponent;
-import com.exformatgames.colorax.entities.BulletEntityBuilder;
+import com.exformatgames.colorax.entities.TankBulletEntityBuilder;
 import com.exformatgames.defender.ecs.engine.EntityBuilder;
 import com.exformatgames.defender.ecs.engine.components.box2d.AngularImpulseComponent;
 import com.exformatgames.defender.ecs.engine.components.box2d.ForceComponent;
-import com.exformatgames.defender.ecs.engine.components.box2d.LinearImpulseComponent;
 import com.exformatgames.defender.ecs.engine.components.input_components.button_event_components.ButtonJustPressedComponent;
-import com.exformatgames.defender.ecs.engine.components.input_components.key_events.KeyJustPressedComponent;
 import com.exformatgames.defender.ecs.engine.components.input_components.key_events.KeyPressedComponent;
-import com.exformatgames.defender.ecs.engine.components.transform_components.RotateComponent;
 
 public class PlayerControlSystem extends IteratingSystem {
 
@@ -47,7 +44,7 @@ public class PlayerControlSystem extends IteratingSystem {
         }
 
         if (buttonJustPressedComponent.buttons.contains(Input.Buttons.LEFT, false)){
-            BulletEntityBuilder.create(tankComponent.firePosition, tankComponent.fireDirection, 0.1f);
+            TankBulletEntityBuilder.create(tankComponent.firePosition, tankComponent.fireDirection, 0.1f);
         }
     }
 }

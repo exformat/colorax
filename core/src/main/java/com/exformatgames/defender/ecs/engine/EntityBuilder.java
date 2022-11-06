@@ -3,11 +3,12 @@ package com.exformatgames.defender.ecs.engine;
 import com.badlogic.ashley.core.*;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.exformatgames.defender.ecs.engine.components.box2d.BodyComponent;
 import com.exformatgames.defender.ecs.engine.components.rendering_components.SpriteComponent;
+import com.exformatgames.defender.ecs.engine.components.transform_components.AnimationComponent;
 
 public abstract class EntityBuilder {
 	protected static World world;
@@ -54,7 +55,21 @@ public abstract class EntityBuilder {
 				owner.spriteComponentArray.add((SpriteComponent) type);
 			}
 			else {
+				((SpriteComponent) type).spriteComponentArray.clear();
 				((SpriteComponent) type).spriteComponentArray.add((SpriteComponent) type);
+				entity.add(type);
+			}
+			return type;
+		}
+
+		if (type instanceof AnimationComponent){
+			AnimationComponent owner = entity.getComponent(AnimationComponent.class);
+			if (owner != null) {
+				owner.animationComponentArray.add((AnimationComponent) type);
+			}
+			else {
+				((AnimationComponent) type).animationComponentArray.clear();
+				((AnimationComponent) type).animationComponentArray.add((AnimationComponent) type);
 				entity.add(type);
 			}
 			return type;
@@ -79,10 +94,24 @@ public abstract class EntityBuilder {
 			return type;
 		}
 
+		if (type instanceof AnimationComponent){
+			AnimationComponent owner = entity.getComponent(AnimationComponent.class);
+			if (owner != null) {
+				owner.animationComponentArray.add((AnimationComponent) type);
+			}
+			else {
+				((AnimationComponent) type).animationComponentArray.add((AnimationComponent) type);
+				entity.add(type);
+			}
+			return type;
+		}
+
 		entity.add(type);
 		return type;
 	}
-
+	public Animation<TextureAtlas.AtlasRegion> createAnimation(String name, float frameDuration){
+		return new Animation<>(frameDuration, atlas.findRegions(name).toArray());
+	}
 	protected static void resetBodyDef(){
 		BODY_DEF.type = BodyDef.BodyType.DynamicBody;
 		BODY_DEF.gravityScale = 1;

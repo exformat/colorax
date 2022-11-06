@@ -51,9 +51,10 @@ public class SpriteComponent implements Component {
 
 		this.offsetX = offsetX;
 		this.offsetY = offsetY;
-		x = offsetX;
-		y = offsetY;
+		//x = offsetX;
+		//y = offsetY;
 
+		offsetRotation = 0;
 		return this;
 	}
 
@@ -182,7 +183,7 @@ public class SpriteComponent implements Component {
 				localY2 *= scaleY;
 			}
 
-			if (rotation != 0) {				
+			if (rotation + offsetRotation != 0) {
 				final float cos = MathUtils.cosDeg(rotation + offsetRotation);
 				final float sin = MathUtils.sinDeg(rotation + offsetRotation);
 				final float localXCos = localX * cos;				

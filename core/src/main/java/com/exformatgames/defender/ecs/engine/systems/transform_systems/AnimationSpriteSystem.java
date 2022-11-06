@@ -15,12 +15,17 @@ public class AnimationSpriteSystem extends IteratingSystem {
 	@Override
 	protected void processEntity(Entity entity, float dt) {
 		AnimationComponent animationComponent = AnimationComponent.mapper.get(entity);
-		SpriteComponent sprite = SpriteComponent.mapper.get(entity);
-		
-		animationComponent.timeAnimation += dt;
-		
-		if(animationComponent.animation.getPlayMode() == Animation.PlayMode.LOOP || ! animationComponent.animation.isAnimationFinished(animationComponent.timeAnimation)){
-			sprite.setUV(animationComponent.animation.getKeyFrame(animationComponent.timeAnimation));
+		SpriteComponent spriteComponent = SpriteComponent.mapper.get(entity);
+
+		for (int i = 0; i < animationComponent.animationComponentArray.size; i++) {
+			AnimationComponent anim = animationComponent.animationComponentArray.get(i);
+			SpriteComponent sprite = spriteComponent.spriteComponentArray.get(i);
+
+			anim.timeAnimation += dt;
+
+			if(anim.animation.getPlayMode() == Animation.PlayMode.LOOP || ! anim.animation.isAnimationFinished(anim.timeAnimation)){
+				sprite.setUV(anim.animation.getKeyFrame(anim.timeAnimation));
+			}
 		}
 	}
 }
