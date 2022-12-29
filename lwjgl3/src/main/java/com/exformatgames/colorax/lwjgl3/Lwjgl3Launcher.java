@@ -2,7 +2,7 @@ package com.exformatgames.colorax.lwjgl3;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.exformatgames.colorax.ColoraxGame;
+import com.exformatgames.arkanoid.ArcanoidGame;
 
 /** Launches the desktop (LWJGL3) application. */
 public class Lwjgl3Launcher {
@@ -11,7 +11,7 @@ public class Lwjgl3Launcher {
 	}
 
 	private static Lwjgl3Application createApplication() {
-		return new Lwjgl3Application(new ColoraxGame(), getDefaultConfiguration());
+		return new Lwjgl3Application(new ArcanoidGame(), getDefaultConfiguration());
 	}
 
 	private static Lwjgl3ApplicationConfiguration getDefaultConfiguration() {

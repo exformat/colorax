@@ -24,6 +24,18 @@ public class BodyComponent implements Component {
 		return this;
 	}
 
+	public BodyComponent setFriction(float value){
+		body.getFixtureList().first().setFriction(value);
+
+		return this;
+	}
+
+	public BodyComponent setFriction(int indexFixture, float value){
+		body.getFixtureList().get(indexFixture).setFriction(value);
+
+		return this;
+	}
+
 	public BodyComponent setFixedRotation(boolean flag){
 
 		body.setFixedRotation(flag);
