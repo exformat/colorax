@@ -95,6 +95,8 @@ public class TestGameScreen implements Screen {
         ScreenUtils.clear(Color.DARK_GRAY);
 
         coloraxCore.update(delta);
+
+        //fpsLogger.log();
     }
 
     @Override

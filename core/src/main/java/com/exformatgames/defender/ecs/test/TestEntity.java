@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.exformatgames.defender.ecs.engine.EntityBuilder;
 import com.exformatgames.defender.ecs.engine.components.box2d.BodyComponent;
 import com.exformatgames.defender.ecs.engine.components.box2d.WorldComponent;
+import com.exformatgames.defender.ecs.engine.components.input_components.MouseComponent;
 import com.exformatgames.defender.ecs.engine.components.input_components.button_event_components.ButtonJustPressedComponent;
 import com.exformatgames.defender.ecs.engine.components.input_components.key_events.KeyPressedComponent;
 import com.exformatgames.defender.ecs.engine.components.rendering_components.*;
@@ -27,10 +28,10 @@ public class TestEntity extends EntityBuilder {
         createComponent(NewPositionComponent.class).init(0, 0);
         createComponent(PositionComponent.class).init(0, 0);
         createComponent(CullingComponent.class).visibleRadius = 1;
-        createComponent(SpriteComponent.class).init(atlas.findRegion("testRegion"), 1);
-            createComponent(SpriteComponent.class).init(atlas.findRegion("testRegion"), 1, 10, 10);
-            createComponent(SpriteComponent.class).init(atlas.findRegion("testRegion"), 0.5f, 50, 50);
-            createComponent(SpriteComponent.class).init(atlas.findRegion("testRegion"), 0.3f, 100, 100);
+        createComponent(SpriteComponent.class).init(atlas.findRegion("test_region"), 1);
+            createComponent(SpriteComponent.class).init(atlas.findRegion("test_region"), 1, 10, 10);
+            createComponent(SpriteComponent.class).init(atlas.findRegion("test_region"), 0.5f, 50, 50);
+            createComponent(SpriteComponent.class).init(atlas.findRegion("test_region"), 0.3f, 100, 100);
 
 
         createComponent(ZIndexComponent.class).zIndex = 1;
@@ -42,13 +43,13 @@ public class TestEntity extends EntityBuilder {
 
         createComponent(WorldComponent.class).init(world, 4, 4);
 
-        createComponent(SizeComponent.class).init(atlas.findRegion("testRegion").getRegionWidth(), atlas.findRegion("testRegion").getRegionHeight());
+        createComponent(SizeComponent.class).init(atlas.findRegion("test_region").getRegionWidth(), atlas.findRegion("test_region").getRegionHeight());
         createComponent(BodyComponent.class).init(BodyBuilder.buildCircle(BodyDef.BodyType.DynamicBody, new Vector2(0, 0), 10))
                 .setFixedRotation(true);
 
         createComponent(GesturePanComponent.class);
         createComponent(KeyPressedComponent.class);
-        //createComponent(ButtonPressedComponent.class);
+        createComponent(MouseComponent.class);
         createComponent(ButtonJustPressedComponent.class);
     }
 }

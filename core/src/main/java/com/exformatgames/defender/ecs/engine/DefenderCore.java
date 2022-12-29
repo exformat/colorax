@@ -176,7 +176,6 @@ public abstract class DefenderCore {
 	}
 
 	public void dispose(){
-
 		stopEngine = true;
 
 		atlas.dispose();

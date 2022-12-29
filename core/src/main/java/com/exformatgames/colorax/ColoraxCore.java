@@ -17,6 +17,7 @@ import com.exformatgames.colorax.game_systems.enemy_systems.EnemySystem;
 import com.exformatgames.colorax.game_systems.enemy_systems.TankEnemySystem;
 import com.exformatgames.colorax.game_systems.weapon_systems.WeaponSystem;
 import com.exformatgames.defender.ecs.engine.DefenderCore;
+import com.exformatgames.defender.ecs.test.*;
 
 public class ColoraxCore extends DefenderCore {
 
@@ -26,11 +27,14 @@ public class ColoraxCore extends DefenderCore {
 
     @Override
     protected void initEntities() {
+
+
+/*
         new B2DWorldEntityBuilder().create();
 
-        new WaveEnemyEntityBuilder().create(WaveEnemyEntityBuilder.TypeEnemy.TROOPER, new Vector2().setToRandomDirection().scl(5), 20, 2);
-        new WaveEnemyEntityBuilder().create(WaveEnemyEntityBuilder.TypeEnemy.SOLDIER, new Vector2().setToRandomDirection().scl(6), 20, 4);
-        new WaveEnemyEntityBuilder().create(WaveEnemyEntityBuilder.TypeEnemy.HEAVY, new Vector2().setToRandomDirection().scl(7), 20, 8);
+        new WaveEnemyEntityBuilder().create(WaveEnemyEntityBuilder.TypeEnemy.TROOPER, new Vector2().setToRandomDirection().scl(5), 100, 0.1f);
+        new WaveEnemyEntityBuilder().create(WaveEnemyEntityBuilder.TypeEnemy.SOLDIER, new Vector2().setToRandomDirection().scl(6), 100, 0.1f);
+        new WaveEnemyEntityBuilder().create(WaveEnemyEntityBuilder.TypeEnemy.HEAVY, new Vector2().setToRandomDirection().scl(7), 100, 0.1f);
         System.out.println("init soldiers");
 
         new TankEnemyBuilder().create(2, 2);
@@ -38,10 +42,15 @@ public class ColoraxCore extends DefenderCore {
 
         new TankEntityBuilder().create();
         System.out.println("init player");
+
+
+ */
     }
 
     @Override
     protected void initGameSystems() {
+
+        /*
         engine.addSystem(new EnemySpawnSystem());
         engine.addSystem(new EnemySystem());
         engine.addSystem(new TankEnemySystem());
@@ -54,5 +63,8 @@ public class ColoraxCore extends DefenderCore {
 
         engine.addSystem(new DamageSystem());
         engine.addSystem(new DeathSystem());
+
+
+         */
     }
 }

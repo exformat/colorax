@@ -7,6 +7,7 @@ import com.exformatgames.defender.ecs.engine.components.box2d.*;
 import com.exformatgames.defender.ecs.engine.components.light_components.*;
 import com.exformatgames.defender.ecs.engine.components.rendering_components.*;
 import com.exformatgames.defender.ecs.engine.components.transform_components.*;
+import com.exformatgames.defender.ecs.engine.systems.util_system.MultiThreadSystem;
 
 import static com.badlogic.gdx.graphics.g2d.SpriteBatch.*;
 
@@ -62,8 +63,10 @@ public class NewPositionSystem extends IteratingSystem {
 		}
 		
 		if(spriteComponent != null){
-			for (SpriteComponent sprite: spriteComponent.spriteComponentArray) {
- 				sprite.x = position.x;
+			for (int i = 0; i < spriteComponent.spriteComponentArray.size; i++) {
+ 				SpriteComponent sprite = spriteComponent.spriteComponentArray.get(i);
+
+				sprite.x = position.x;
 				sprite.y = position.y;
 
 				if (sprite.dirty){
